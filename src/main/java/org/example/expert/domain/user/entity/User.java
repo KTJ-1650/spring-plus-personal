@@ -21,9 +21,13 @@ public class User extends Timestamped {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    public User(String email, String password, UserRole userRole) {
+    private String nickname;
+
+
+    public User(String email, String password,String nickname, UserRole userRole) {
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
         this.userRole = userRole;
     }
 
@@ -33,8 +37,10 @@ public class User extends Timestamped {
         this.userRole = userRole;
     }
 
+
+
     public static User fromAuthUser(AuthUser authUser) {
-        return new User(authUser.getId(), authUser.getEmail(), authUser.getUserRole());
+        return new User(authUser.getId(), authUser.getEmail(),authUser.getUserRole());
     }
 
     public void changePassword(String password) {
