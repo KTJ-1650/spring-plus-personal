@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 public interface TodoRepository extends JpaRepository<Todo, Long> {
@@ -27,4 +28,7 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
 
     @Query("SELECT t FROM Todo t WHERE (:weather IS NULL OR t.weather = :weather) ORDER BY t.modifiedAt DESC")
     Page<Todo> findTodoByWeatherOrNull(Pageable pageable, @Param("weather") String weather);
+
+    @Query("SELECT t FROM Todo t WHERE t.modifiedAt BETWEEN :startDate AND :endDate ORDER BY t.modifiedAt DESC")
+    Page<Todo> findTodoByModifiedAt(Pageable pageable,@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }
