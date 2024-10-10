@@ -98,9 +98,7 @@ public class TodoService {
 
         Pageable pageable = PageRequest.of(page - 1, size);
 
-
         return  todoRepository.todoSearch(pageable,title,nickname,startDate,endDate);
-
 
     }
 }
